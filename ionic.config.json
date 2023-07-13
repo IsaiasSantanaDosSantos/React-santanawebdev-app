@@ -1,0 +1,7 @@
+{
+  "name": "santanawebdev-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
