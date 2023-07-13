@@ -1,0 +1,5 @@
+For this app I use:
+*Ionic 6;
+*React.js 18;
+*styled-component;
+*react-transition-group;

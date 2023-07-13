@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
+import Initial from './pages/Initial';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -13,31 +14,44 @@ import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+// import '@ionic/react/css/padding.css';
+// import '@ionic/react/css/float-elements.css';
+// import '@ionic/react/css/text-alignment.css';
+// import '@ionic/react/css/text-transformation.css';
+// import '@ionic/react/css/flex-utils.css';
+// import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRedirectToHome(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+<IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/">
+            {/* {!redirectToHome ? <Initial /> : <Redirect to="/home" />} */}
+            <Initial />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
